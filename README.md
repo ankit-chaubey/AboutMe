@@ -7,7 +7,7 @@ I'm a 22 y.o college student from Delhi, India 🇮🇳
 ## Connect with me
 [![Telegram](https://img.shields.io/badge/Telegram-00008b.svg?style=for-the-badge&logo=telegram)](https://t.me/ankit_chaubey) [![Telgram Bot](https://img.shields.io/badge/Contact_bot-00FFFF.svg?style=for-the-badge&logo=telegram)](https://t.me/ChaubeyBot)
 [![Gmail](https://img.shields.io/badge/gmail-%23DD0031.svg?&style=for-the-badge&logo=gmail&logoColor=white)](mailto:m.ankitchaubey@gmail.com) [![Github](https://img.shields.io/badge/GitHub_Profile-FF5733.svg?style=for-the-badge&logo=github)](https://github.com/ankit-chaubey)
-## <h3><img src="https://user-images.githubusercontent.com/74038190/206662607-d9e7591e-bbf9-42f9-9386-29efc927bc16.gif" width="30px" height="30px"><b> Lang and contribution</h3></b>
+## <img src="https://user-images.githubusercontent.com/74038190/206662607-d9e7591e-bbf9-42f9-9386-29efc927bc16.gif" width="30px" height="30px"><b> Lang and contribution</b>
 [![github stats](https://github-readme-stats.vercel.app/api?username=ankit-chaubey&show_icons=true&theme=cobalt&count_private=true)](https://github.com/ankit-chaubey)
 [![top lang](https://github-readme-stats.vercel.app/api/top-langs?username=ankit-chaubey&show_icons=true&theme=tokyonight&layout=compact)](https://github.com/ankit-chaubey)
 [![ankit-chaubey's github streak](https://github-readme-streak-stats.herokuapp.com/?user=ankit-chaubey&theme=cobalt)](https://github.com/ankit-chaubey/github-readme-streak-stats)
