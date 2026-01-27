@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aboutme — Ankit Chaubey</title>
+
+  <meta name="description" content="Ankit Chaubey — curiosity-driven learner exploring systems, APIs, and automation." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================
+       THEMES
+    ====================== */
+
+    body.theme-dark {
+      --bg:#0b0f1a;--panel:#0f1629;--text:#d1d5db;
+      --muted:#6b7280;--accent:#38bdf8;--border:#1f2937;
+    }
+    body.theme-blue {
+      --bg:#050b18;--panel:#0a1430;--text:#dbeafe;
+      --muted:#93c5fd;--accent:#60a5fa;--border:#1e3a8a;
+    }
+    body.theme-light {
+      --bg:#f8fafc;--panel:#ffffff;--text:#0f172a;
+      --muted:#64748b;--accent:#0284c7;--border:#e5e7eb;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:"JetBrains Mono",monospace;
+      background:var(--bg);color:var(--text);
+      transition:.5s;overflow-x:hidden;
+    }
+
+    .toggle{
+      position:fixed;top:20px;right:20px;
+      background:var(--panel);border:1px solid var(--border);
+      color:var(--text);padding:8px 16px;
+      border-radius:999px;cursor:pointer;z-index:10;
+    }
+
+    .container{
+      min-height:100vh;display:flex;
+      align-items:center;justify-content:center;
+      padding:40px 20px;position:relative;z-index:1;
+    }
+
+    .file{
+      max-width:900px;width:100%;
+      background:linear-gradient(180deg,var(--panel),transparent);
+      border:1px solid var(--border);
+      border-radius:18px;padding:32px;
+      box-shadow:0 30px 80px rgba(0,0,0,.35);
+      animation:fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:none}
+    }
+
+    .profile{
+      display:flex;gap:18px;align-items:center;margin-bottom:24px;
+    }
+
+    .avatar{
+      width:88px;height:88px;border-radius:50%;
+      border:1px solid var(--border);object-fit:cover;
+    }
+
+    .bio{color:var(--muted);font-size:.9rem}
+
+    .line{
+      display:block;margin-bottom:10px;
+      transition:transform .25s ease;
+    }
+    .line:hover{transform:translateX(6px)}
+
+    .key{color:var(--accent)}
+    .value{color:var(--text)}
+    .comment{color:var(--muted)}
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    footer{
+      margin-top:28px;text-align:center;
+      font-size:.85rem;color:var(--muted);
+    }
+
+    /* ======================
+       MOVING WATERMARK
+    ====================== */
+
+    .watermark{
+      position:fixed;inset:-20%;
+      display:flex;align-items:center;justify-content:center;
+      font-family:"Pacifico",cursive;
+      font-size:5rem;opacity:.035;
+      pointer-events:none;user-select:none;
+      text-align:center;z-index:0;
+      animation:drift 40s linear infinite;
+    }
+
+    @keyframes drift{
+      0%{transform:translate(-6%,-6%) rotate(-8deg)}
+      50%{transform:translate(6%,6%) rotate(8deg)}
+      100%{transform:translate(-6%,-6%) rotate(-8deg)}
+    }
+
+    @media(max-width:600px){
+      .watermark{font-size:3rem}
+      .profile{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body class="theme-dark">
+
+<button class="toggle" id="themeToggle">Theme</button>
+
+<div class="watermark">
+  Ankit Chaubey<br>@ankit-chaubey
+</div>
+
+<main class="container">
+  <div class="file">
+
+    <div class="profile">
+      <img id="avatar" class="avatar" />
+      <div>
+        <div class="line"><span class="key">user</span>: <span class="value">"ankit-chaubey"</span></div>
+        <div class="bio" id="bio">loading bio…</div>
+      </div>
+    </div>
+
+    <span class="line comment">// aboutme.config</span>
+    <span class="line comment">// developer identity</span>
+    <br>
+
+    <span class="line"><span class="key">name</span>: <span class="value">"Ankit Chaubey"</span></span>
+    <span class="line"><span class="key">location</span>: <span class="value">"India"</span></span>
+    <span class="line"><span class="key">focus</span>: <span class="value">["systems","apis","automation"]</span></span>
+    <span class="line"><span class="key">languages</span>: <span class="value">["python","go","c","c++"]</span></span>
+
+    <br>
+
+    <span class="line">
+      <span class="key">philosophy</span>:
+      <span class="value">"coding is a tool for understanding, not the destination"</span>
+    </span>
+
+    <br>
+
+    <span class="line key">contact</span>: <span class="value">{</span>
+    <span class="line value">  github: "<a href="https://github.com/ankit-chaubey" target="_blank">github.com/ankit-chaubey</a>",</span>
+    <span class="line value">  telegram: "<a href="https://t.me/ankify" target="_blank">@ankify</a>",</span>
+    <span class="line value">  email: "<a href="mailto:m.ankitchaubey@gmail.com">m.ankitchaubey@gmail.com</a>"</span>
+    <span class="line value">}</span>
+
+    <footer>
+      © Ankit Chaubey · signature in motion
+    </footer>
+
+  </div>
+</main>
+
+<script>
+  /* ---------- THEME TOGGLE ---------- */
+  const body=document.body;
+  const themes=['theme-dark','theme-blue','theme-light'];
+  let index=Number(localStorage.getItem('theme'))||0;
+  body.className=themes[index];
+
+  document.getElementById('themeToggle').onclick=()=>{
+    body.classList.remove(themes[index]);
+    index=(index+1)%themes.length;
+    body.classList.add(themes[index]);
+    localStorage.setItem('theme',index);
+  };
+
+  /* ---------- GITHUB PROFILE ---------- */
+  fetch('https://api.github.com/users/ankit-chaubey')
+    .then(r=>r.json())
+    .then(u=>{
+      document.getElementById('avatar').src=u.avatar_url;
+      document.getElementById('bio').textContent=u.bio||'';
+    });
+</script>
+
+</body>
+</html>
