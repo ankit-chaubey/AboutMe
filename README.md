@@ -1,5 +1,5 @@
 ## About Me:
- - https://ankit-chaubey.github.io/aboutme
+ - [↗](https://ankitchaubey.is-a.dev/)
 
 ```js
 const profile = {
@@ -8,6 +8,6 @@ const profile = {
   location: "India",
   languages: ["Python", "Go", "C", "C++"],
   website: "https://ankit-chaubey.github.io/",
-  aboutMe: "https://ankit-chaubey.github.io/aboutme"
+  aboutMe: "https://ankitchaubey.is-a.dev/"
 };
 ```
