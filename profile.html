@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ankit Chaubey</title>
+  <meta name="description" content="Ankit Chaubey — curiosity-driven learner. Systems, APIs, automation, and low-level tooling." />
+  <meta name="author" content="Ankit Chaubey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ankit-chaubey.github.io/" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Open Graph & Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ankit Chaubey — Systems, APIs & Automation" />
+  <meta property="og:description" content="Curiosity-driven learner exploring systems, APIs, automation, and low-level tooling." />
+  <meta property="og:url" content="https://ankit-chaubey.github.io/" />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/85471319?v=4" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ankit Chaubey" />
+  <meta name="twitter:description" content="Systems, APIs, automation, and low-level tooling." />
+  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/85471319?v=4" />
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --text: #e6eef6;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-2: #7c3aed;
+      --border: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.02);
+      --card-radius: 18px;
+      --shadow: 0 12px 36px rgba(2,6,23,0.6);
+      --transition-speed: 300ms;
+    }
+
+    body.light {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #0284c7;
+      --accent-2: #7c3aed;
+      --border: rgba(15,23,42,0.06);
+      --glass: rgba(10,14,19,0.02);
+      --shadow: 0 10px 30px rgba(2,6,23,0.06);
+    }
+
+    body.amoled {
+      --bg: #000000;
+      --panel: #000000;
+      --text: #e6eef6;
+      --muted: #9aa4b2;
+      --accent: #00e5ff;
+      --accent-2: #ff3b99;
+      --border: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.02);
+      --shadow: none;
+    }
+
+    * { box-sizing: border-box; }
+    html,body { height:100%; }
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% -10%, rgba(56,189,248,0.06), transparent),
+        linear-gradient(180deg, rgba(255,255,255,0.01), transparent),
+        var(--bg);
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+    }
+
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    .container { max-width:1100px; margin:32px auto; padding:28px 20px; }
+
+    /* Theme overlay for smooth crossfade */
+    .theme-overlay {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      opacity: 0;
+      transition: opacity 300ms ease;
+      z-index: 9999;
+    }
+    .theme-changing .theme-overlay { opacity: 1; }
+
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:48px;
+      transition:transform 260ms ease;
+    }
+
+    .left {
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+
+    .avatar {
+      width:96px;height:96px;border-radius:50%;overflow:hidden;border:1px solid var(--border);
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      flex-shrink:0;
+      transition:transform 360ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms ease;
+    }
+    .avatar img { width:100%;height:100%;object-fit:cover;display:block; }
+
+    h1 { font-size:2.6rem;margin:0 0 6px 0;letter-spacing:-0.03em; }
+    .subtitle { color:var(--muted); max-width:650px; margin:0; }
+
+    .toggle {
+      background: linear-gradient(180deg, var(--panel), transparent);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      display:inline-flex;align-items:center;gap:10px;font-weight:600;
+      transition: transform 160ms ease, box-shadow 160ms ease, background var(--transition-speed) ease;
+      position:relative;overflow:hidden;
+    }
+    .toggle:active { transform:translateY(1px); }
+    .toggle svg{width:18px;height:18px;display:block}
+
+    /* Grid */
+    .grid { display:grid; grid-template-columns: 1fr 360px; gap:20px; align-items:start; }
+    @media (max-width:980px) { .grid{ grid-template-columns:1fr; } header{ flex-direction:column; align-items:flex-start; } }
+
+    /* Card */
+    .card {
+      background: linear-gradient(180deg, var(--panel), transparent);
+      border-radius: var(--card-radius);
+      padding: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 220ms ease, box-shadow 220ms ease, background var(--transition-speed) ease;
+    }
+
+    .stats { display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+    .stat { background: rgba(255,255,255,0.02); padding:8px 10px; border-radius:12px; border:1px solid var(--border); color:var(--muted); font-weight:700; }
+
+    .repo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; }
+    .repo { padding:14px;border-radius:12px;border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); transition:transform 160ms ease, box-shadow 160ms ease; position:relative; }
+    .repo:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(2,6,23,0.25); }
+    .repo h3{ margin:0 0 8px 0; font-size:1.02rem; }
+    .repo p{ margin:0;color:var(--muted);font-size:0.92rem; min-height:44px; }
+    .repo .meta{ display:flex; gap:10px; align-items:center; margin-top:10px; color:var(--muted); font-size:0.88rem; flex-wrap:wrap; }
+
+    .lang-list { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .lang-pill { display:inline-flex; gap:8px; align-items:center; padding:6px 8px; border-radius:999px; border:1px solid var(--border); background: rgba(0,0,0,0.03); font-weight:600; color:var(--muted); font-size:0.85rem; }
+
+    .contrib { width:100%; max-width:720px; border-radius:12px; overflow:hidden; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
+    .contrib img { display:block; width:100%; height:auto; }
+
+    .fade { opacity:0; transform:translateY(8px); transition:opacity 420ms ease, transform 420ms ease; }
+    .fade.show { opacity:1; transform:none; }
+
+    .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04), rgba(255,255,255,0.02)); height:12px; border-radius:6px; animation: shimmer 1.6s linear infinite; }
+    @keyframes shimmer { 0% { background-position:-200px 0 } 100% { background-position:200px 0 } }
+
+    footer { margin-top:28px; text-align:center; color:var(--muted); font-size:0.92rem; }
+
+    /* small responsive */
+    @media (max-width:520px){
+      h1{ font-size:2.1rem }
+      .avatar{ width:72px;height:72px }
+      .toggle{ padding:8px 10px }
+    }
+
+    /* accessible focus */
+    .toggle:focus { outline:3px solid rgba(56,189,248,0.14); outline-offset:3px; }
+  </style>
+</head>
+<body>
+  <div class="theme-overlay" aria-hidden="true"></div>
+
+  <div class="container">
+    <!-- Header (keeps your original size/layout) -->
+    <header class="fade" id="header">
+      <div class="left">
+        <div class="avatar" id="avatar">
+          <img id="ghAvatar" src="" alt="GitHub avatar">
+        </div>
+        <div>
+          <h1 id="ghName">Ankit Chaubey</h1>
+          <p class="subtitle" id="ghBio">Curiosity-driven learner exploring systems, APIs, automation, and low-level tooling.</p>
+          <p id="ghJoined" style="margin:6px 0 0 0;color:var(--muted)">Joined: — · Username: <span id="ghLogin">—</span></p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <button id="themeToggle" class="toggle" aria-label="Toggle theme (Dark / Light / AMOLED)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.2-3.09-.12-.29-.52-1.47.11-3.06 0 0 .98-.31 3.21 1.18a11.1 11.1 0 0 1 2.92-.39c.99.01 1.99.13 2.92.39 2.23-1.49 3.21-1.18 3.21-1.18.63 1.59.23 2.77.11 3.06.75.8 1.2 1.83 1.2 3.09 0 4.42-2.69 5.39-5.25 5.68.42.37.8 1.11.8 2.24 0 1.62-.01 2.92-.01 3.32 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/>
+          </svg>
+          <span id="themeLabel">Theme</span>
+        </button>
+
+        <a id="ghProfileBtn" class="toggle" href="#" target="_blank" rel="noopener noreferrer">View GitHub</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left column -->
+      <div>
+        <section class="card fade" id="about">
+          <h2 style="margin-top:0">About</h2>
+          <p id="aboutText">I’m a college student from India who enjoys understanding how systems work by building small tools, experimenting with APIs, and automating workflows. Programming is a tool for understanding — not the destination.</p>
+
+          <div style="display:flex;gap:16px;align-items:start">
+            <div style="flex:1">
+              <div class="stats" id="topStats">
+                <div class="stat">Loading…</div>
+              </div>
+
+              <div style="margin-top:12px">
+                <strong>Skills</strong>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+                  <span style="padding:6px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted)">Python</span>
+                  <span style="padding:6px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted)">Go</span>
+                  <span style="padding:6px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted)">C / C++</span>
+                  <span style="padding:6px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted)">Linux</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="width:220px">
+              <div class="contrib" title="Contribution graph">
+                <img id="contrib" src="" alt="Contribution graph">
+              </div>
+            </div>
+          </div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)">
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3 style="margin:0">Top repositories</h3>
+            <div id="lastCommitOverall" style="color:var(--muted)">Last commit: —</div>
+          </div>
+
+          <div id="pinned" class="repo-grid" style="margin-top:12px">
+            <div class="repo"><div class="skeleton" style="width:60%"></div><div style="height:10px;margin-top:10px" class="skeleton"></div></div>
+            <div class="repo"><div class="skeleton" style="width:60%"></div><div style="height:10px;margin-top:10px" class="skeleton"></div></div>
+            <div class="repo"><div class="skeleton" style="width:60%"></div><div style="height:10px;margin-top:10px" class="skeleton"></div></div>
+          </div>
+        </section>
+
+        <section class="card fade" id="allRepos" style="margin-top:18px">
+          <h2 style="margin-top:0">All repositories</h2>
+          <div id="repos" class="repo-grid" style="margin-top:12px">
+            <div class="repo"><div class="skeleton" style="width:60%"></div><div style="height:10px;margin-top:10px" class="skeleton"></div></div>
+            <div class="repo"><div class="skeleton" style="width:60%"></div><div style="height:10px;margin-top:10px" class="skeleton"></div></div>
+            <div class="repo"><div class="skeleton" style="width:60%"></div><div style="height:10px;margin-top:10px" class="skeleton"></div></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right column -->
+      <aside>
+        <section class="card fade">
+          <h3 style="margin-top:0">Contact</h3>
+          <p style="margin:8px 0">
+            <strong>Email:</strong> <a id="email" href="mailto:m.ankitchaubey@gmail.com">m.ankitchaubey@gmail.com</a><br>
+            <strong>GitHub:</strong> <span id="loginInline">—</span><br>
+            <strong>Telegram:</strong> <a href="https://t.me/ankify" target="_blank">@ankify</a>
+          </p>
+
+          <div style="margin-top:12px">
+            <strong>Quick actions</strong>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button id="setTokenBtn" class="toggle" title="Set a GitHub token to increase rate limits">Set Token</button>
+              <button id="clearTokenBtn" class="toggle" title="Clear saved token">Clear Token</button>
+            </div>
+            <div id="tokenStatus" style="margin-top:10px;color:var(--muted);font-size:0.9rem">API: public (rate-limited)</div>
+          </div>
+        </section>
+
+        <section class="card fade" style="margin-top:16px">
+          <h3 style="margin-top:0">Organizations</h3>
+          <div id="orgs" style="margin-top:10px">
+            <div class="skeleton" style="width:80%;height:12px;border-radius:6px"></div>
+          </div>
+        </section>
+
+        <section class="card fade" style="margin-top:16px">
+          <h3 style="margin-top:0">Activity & stats</h3>
+          <div style="margin-top:8px">
+            <div style="color:var(--muted)">Total repos (public): <strong id="totalRepos">—</strong></div>
+            <div style="color:var(--muted)">Source repos indexed: <strong id="sourceRepos">—</strong></div>
+            <div style="color:var(--muted)">Total forks: <strong id="totalForks">—</strong></div>
+            <div style="color:var(--muted)">Followers: <strong id="followers">—</strong></div>
+            <div style="color:var(--muted)">Total commits (best-effort): <strong id="totalCommits">—</strong></div>
+            <div style="color:var(--muted);margin-top:8px">Repositories loaded: <strong id="loadedCount">—</strong></div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <footer class="fade" style="margin-top:28px;color:var(--muted);text-align:center">
+      © <span id="year"></span> Ankit Chaubey · Built with simplicity
+    </footer>
+  </div>
+
+  <script>
+    /*
+      FULL CLIENT-SIDE SCRIPT
+      - Fetches full paginated repo list (no arbitrary repo cap)
+      - Fetches languages, last commit, contributors stats (best-effort)
+      - Smooth theme transitions and overlay
+      - Optional PAT support (user can paste personal token to increase rate limits)
+      - Concurrency-limited requests to avoid overwhelming the API and reduce browser resource use
+      - Provides graceful fallback messages when rate-limited
+      NOTE: GitHub API has rate-limits. For large accounts, consider using a PAT (click "Set Token").
+    */
+
+    (function(){
+      const USER = 'ankit-chaubey';
+      const CONTACT_EMAIL = 'm.ankitchaubey@gmail.com';
+      const PER_PAGE = 100;                 // GitHub max per page
+      const LANG_CONCURRENCY = 8;           // concurrent language requests
+      const COMMIT_CONCURRENCY = 6;         // concurrent commit requests
+      const STATS_CONCURRENCY = 6;          // concurrent contributors stats requests
+      const STATS_POLL_RETRIES = 6;         // stats endpoint may return 202 while computing
+      const STATS_POLL_DELAY = 1500;        // ms base delay for polling
+
+      // Elements
+      const ghAvatar = document.getElementById('ghAvatar');
+      const ghName = document.getElementById('ghName');
+      const ghBio = document.getElementById('ghBio');
+      const ghJoined = document.getElementById('ghJoined');
+      const ghProfileBtn = document.getElementById('ghProfileBtn');
+      const topStats = document.getElementById('topStats');
+      const contribImg = document.getElementById('contrib');
+      const pinnedEl = document.getElementById('pinned');
+      const reposEl = document.getElementById('repos');
+      const orgsEl = document.getElementById('orgs');
+      const lastCommitOverall = document.getElementById('lastCommitOverall');
+      const totalReposEl = document.getElementById('totalRepos');
+      const sourceReposEl = document.getElementById('sourceRepos');
+      const totalForksEl = document.getElementById('totalForks');
+      const followersEl = document.getElementById('followers');
+      const totalCommitsEl = document.getElementById('totalCommits');
+      const loadedCountEl = document.getElementById('loadedCount');
+      const loginInline = document.getElementById('loginInline');
+      const setTokenBtn = document.getElementById('setTokenBtn');
+      const clearTokenBtn = document.getElementById('clearTokenBtn');
+      const tokenStatusEl = document.getElementById('tokenStatus');
+      const themeToggle = document.getElementById('themeToggle');
+      const themeLabel = document.getElementById('themeLabel');
+      const themeOverlay = document.querySelector('.theme-overlay');
+
+      // Theme handling (dark, light, amoled)
+      const THEMES = ['dark','light','amoled'];
+      const THEME_KEY = 'site-theme:v1';
+      function savedTheme(){ return localStorage.getItem(THEME_KEY) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); }
+      function applyTheme(t){
+        document.body.classList.remove(...THEMES);
+        document.body.classList.add(t);
+        document.querySelector('meta[name="theme-color"]').content = t === 'amoled' ? '#000000' : getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#0b1220';
+        themeLabel.textContent = t === 'light' ? 'Light' : t === 'amoled' ? 'AMOLED' : 'Dark';
+      }
+      function cycleTheme(){
+        const cur = savedTheme();
+        const idx = THEMES.indexOf(cur);
+        const nxt = THEMES[(idx + 1) % THEMES.length];
+        // smooth overlay crossfade
+        document.body.classList.add('theme-changing');
+        requestAnimationFrame(()=>{
+          themeOverlay.style.transition = 'opacity 260ms ease';
+          themeOverlay.style.opacity = '1';
+          setTimeout(()=>{
+            localStorage.setItem(THEME_KEY, nxt);
+            applyTheme(nxt);
+            themeOverlay.style.opacity = '0';
+            setTimeout(()=> document.body.classList.remove('theme-changing'), 300);
+          }, 220);
+        });
+      }
+      applyTheme(savedTheme());
+      themeToggle.addEventListener('click', cycleTheme);
+      window.addEventListener('keydown', e => { if(e.key === 't' && !/input|textarea/i.test(document.activeElement?.tagName)) cycleTheme(); });
+
+      // Token management (optional)
+      const TOKEN_KEY = 'gh_token_for_profile';
+      function getToken(){ return localStorage.getItem(TOKEN_KEY) || ''; }
+      function setToken(v){
+        if(!v){ localStorage.removeItem(TOKEN_KEY); tokenStatusEl.textContent = 'API: public (rate-limited)'; return; }
+        localStorage.setItem(TOKEN_KEY, v.trim()); tokenStatusEl.textContent = 'API: token set (higher rate-limits)';
+      }
+      setTokenBtn.addEventListener('click', () => {
+        const t = prompt('Paste a GitHub Personal Access Token with repo/public_repo scope (only store locally in your browser):');
+        if(t) { setToken(t); alert('Token stored locally. Reload page to use immediately.'); }
+      });
+      clearTokenBtn.addEventListener('click', () => { setToken(''); alert('Token cleared'); });
+
+      // Basic auth headers
+      function authHeaders(){
+        const token = getToken();
+        return token ? { Authorization: 'token ' + token } : {};
+      }
+
+      // Generic GH fetch with optional token
+      async function ghFetchRaw(path){
+        const url = `https://api.github.com${path}`;
+        const res = await fetch(url, { headers: { Accept: 'application/vnd.github.v3+json', ...authHeaders() } });
+        return res;
+      }
+      async function ghFetchJson(path){
+        const res = await ghFetchRaw(path);
+        if(!res.ok){
+          const text = await res.text().catch(()=> '');
+          const err = new Error(`GitHub API error ${res.status} ${res.statusText}: ${text}`);
+          err.status = res.status;
+          throw err;
+        }
+        return res.json();
+      }
+
+      // Helper to fetch all pages for an endpoint (per_page=100)
+      async function fetchAllPages(pathBase){
+        let page = 1;
+        const items = [];
+        while(true){
+          const path = `${pathBase}${pathBase.includes('?') ? '&' : '?'}per_page=${PER_PAGE}&page=${page}`;
+          const res = await ghFetchRaw(path);
+          if(res.status === 403) throw new Error('Rate limited by GitHub API (403). Set a token to increase limits.');
+          if(res.status === 404) break;
+          const json = await res.json();
+          if(!Array.isArray(json)) { // if not array, return the single result
+            return json;
+          }
+          if(json.length === 0) break;
+          items.push(...json);
+          if(json.length < PER_PAGE) break;
+          page++;
+        }
+        return items;
+      }
+
+      // Utility: limited concurrency pool
+      function pMap(inputs, mapper, concurrency = 6){
+        return new Promise((resolve, reject) => {
+          const results = [];
+          let i = 0, active = 0;
+          function next(){
+            if(i >= inputs.length && active === 0) return resolve(results);
+            while(active < concurrency && i < inputs.length){
+              const curIndex = i++;
+              active++;
+              Promise.resolve(inputs[curIndex])
+                .then(item => mapper(item))
+                .then(r => { results[curIndex] = r; active--; next(); })
+                .catch(err => { reject(err); });
+            }
+          }
+          next();
+        });
+      }
+
+      // Format date
+      function fmtDate(iso){
+        if(!iso) return '—';
+        try{
+          const d = new Date(iso);
+          return d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+        }catch(e){ return iso; }
+      }
+
+      // Small HTML escape
+      function escapeHtml(s){ return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
+
+      // Language color map (extendable)
+      const LANG_COLORS = { 'JavaScript':'#f1e05a','TypeScript':'#2b7489','Python':'#3572A5','Go':'#00ADD8','C':'#555555','C++':'#f34b7d','Rust':'#dea584','Java':'#b07219','HTML':'#e34c26','CSS':'#563d7c','Shell':'#89e051' };
+
+      // Render helpers
+      function makeRepoCard(repo){
+        const div = document.createElement('div');
+        div.className = 'repo';
+        div.setAttribute('data-repo', repo.name);
+        const homepageLink = repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">Website</a> · ` : '';
+        const desc = repo.description ? escapeHtml(repo.description) : 'No description provided.';
+        div.innerHTML = `
+          <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name)}</a></h3>
+          <p>${desc}</p>
+          <div class="meta">
+            <div class="small repo-activity">Activity loading…</div>
+            <div class="small">★ ${repo.stargazers_count || 0} · Forks: ${repo.forks_count || 0}</div>
+            <div class="small">${homepageLink}Updated: ${fmtDate(repo.pushed_at)}</div>
+          </div>
+        `;
+        return div;
+      }
+
+      // Load profile
+      async function loadProfile(){
+        try{
+          const u = await ghFetchJson(`/users/${USER}`);
+          ghAvatar.src = u.avatar_url;
+          ghName.textContent = u.name || u.login;
+          ghBio.textContent = u.bio || '';
+          ghJoined.textContent = `Joined: ${fmtDate(u.created_at)} · Username: ${u.login}`;
+          ghProfileBtn.href = u.html_url;
+          loginInline.textContent = u.login;
+          contribImg.src = `https://ghchart.rshah.org/${encodeURIComponent(USER)}`;
+          // init small stats box (stars/forks/followers will be updated once repos loaded)
+          topStats.innerHTML = `<div class="stat">Loading…</div>`;
+          return u;
+        }catch(err){
+          topStats.innerHTML = `<div class="stat">Profile unavailable</div>`;
+          console.error('Profile load error', err);
+          throw err;
+        }
+      }
+
+      // Load organizations
+      async function loadOrgs(){
+        try{
+          const orgs = await fetchAllPages(`/users/${USER}/orgs`);
+          orgsEl.innerHTML = '';
+          if(orgs.length === 0){ orgsEl.innerHTML = `<div style="color:var(--muted)">No organizations</div>`; return; }
+          orgs.forEach(o => {
+            const d = document.createElement('div');
+            d.style.display = 'flex';
+            d.style.gap = '10px';
+            d.style.alignItems = 'center';
+            d.style.marginBottom = '12px';
+            d.innerHTML = `<img src="${o.avatar_url}" alt="${o.login} avatar" style="width:44px;height:44px;border-radius:10px;object-fit:cover;border:1px solid var(--border)"><div style="flex:1"><strong>${o.login}</strong><div style="color:var(--muted);font-size:0.92rem">${o.description || 'GitHub organization'}</div></div><a style="color:var(--accent);font-weight:600" href="${o.html_url}" target="_blank" rel="noopener noreferrer">View</a>`;
+            orgsEl.appendChild(d);
+          });
+          return orgs;
+        }catch(err){
+          orgsEl.innerHTML = `<div style="color:var(--muted)">Unable to load organizations</div>`;
+          console.error('Orgs error', err);
+          return [];
+        }
+      }
+
+      // Poll for contributors stats if 202 returned
+      async function fetchContribsStats(owner, repoName){
+        const path = `/repos/${owner}/${repoName}/stats/contributors`;
+        for(let attempt=0; attempt < STATS_POLL_RETRIES; attempt++){
+          try{
+            const res = await ghFetchRaw(path);
+            if(res.status === 202){
+              // processing, wait and retry
+              await new Promise(r => setTimeout(r, STATS_POLL_DELAY * (attempt + 1)));
+              continue;
+            }
+            if(!res.ok) {
+              // some repos might be empty or blocked; return null
+              return null;
+            }
+            const json = await res.json();
+            return json; // array of contributors
+          }catch(err){
+            // on network error, return null
+            return null;
+          }
+        }
+        return null;
+      }
+
+      // Get latest commit (single fast call)
+      async function fetchLatestCommit(owner, repoName, branch){
+        try{
+          const commits = await ghFetchJson(`/repos/${owner}/${repoName}/commits?sha=${branch || 'master'}&per_page=1`);
+          if(Array.isArray(commits) && commits[0]){
+            const c = commits[0];
+            return { sha: c.sha, date: c.commit?.author?.date || c.commit?.committer?.date, message: c.commit?.message?.split('\n')[0] };
+          }
+          return null;
+        }catch(err){
+          return null;
+        }
+      }
+
+      // Fetch languages for a repo
+      async function fetchLanguages(owner, repoName){
+        try{
+          const langs = await ghFetchJson(`/repos/${owner}/${repoName}/languages`);
+          return langs; // object of {lang: bytes}
+        }catch(err){
+          return null;
+        }
+      }
+
+      // Main: fetch all repos (paginated), build UI and fetch per-repo details
+      async function loadAllRepos(){
+        try{
+          // fetch all public repos (paginated)
+          const all = await fetchAllPages(`/users/${USER}/repos?sort=updated`);
+          // all includes sources and forks. We'll compute totals and show source repos primarily.
+          const totalPublicRepos = all.length;
+          totalReposEl.textContent = totalPublicRepos;
+
+          const sourceRepos = all.filter(r => !r.fork);
+          sourceReposEl.textContent = sourceRepos.length;
+
+          // compute aggregate stars/forks
+          const totalStars = sourceRepos.reduce((s,r)=> s + (r.stargazers_count||0), 0);
+          const totalForks = sourceRepos.reduce((s,r)=> s + (r.forks_count||0), 0);
+          totalForksEl.textContent = totalForks;
+
+          // update top stats
+          topStats.innerHTML = `
+            <div class="stat">⭐ Stars: <strong>${totalStars}</strong></div>
+            <div class="stat">🍴 Forks: <strong>${totalForks}</strong></div>
+            <div class="stat">📦 Repos: <strong>${totalPublicRepos}</strong></div>
+          `;
+
+          // show top repos by stars then recency (top 6)
+          const topRepos = [...sourceRepos].sort((a,b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at))).slice(0,6);
+          pinnedEl.innerHTML = '';
+          topRepos.forEach(r => pinnedEl.appendChild(makeRepoCard(r)));
+
+          // render all source repos (cards with skeleton)
+          reposEl.innerHTML = '';
+          sourceRepos.forEach(r => reposEl.appendChild(makeRepoCard(r)));
+
+          // update followers (fetch profile to get followers if not already)
+          try{
+            const profile = await ghFetchJson(`/users/${USER}`);
+            followersEl.textContent = profile.followers || 0;
+          }catch(e){
+            followersEl.textContent = '—';
+          }
+
+          // last commit (cheap): use pushed_at (fast)
+          const lastPush = sourceRepos.reduce((m,r) => r.pushed_at > m ? r.pushed_at : m, sourceRepos[0]?.pushed_at || null);
+          lastCommitOverall.textContent = `Last commit: ${fmtDate(lastPush)}`;
+
+          // set loaded counts
+          loadedCountEl.textContent = sourceRepos.length;
+
+          // PER-REPO DETAILED FETCHES (languages, latest commit, contributor stats)
+          // To avoid hammering, do in pools with concurrency limits.
+
+          // Map of repo name -> element
+          const repoElements = {};
+          document.querySelectorAll('[data-repo]').forEach(el => repoElements[el.getAttribute('data-repo')] = el);
+
+          // Languages: for all source repos (concurrency-limited)
+          await pMap(sourceRepos, async r => {
+            const langs = await fetchLanguages(USER, r.name);
+            const el = repoElements[r.name];
+            if(!el) return;
+            const meta = el.querySelector('.meta');
+            if(!meta) return;
+            if(langs && Object.keys(langs).length > 0){
+              const totalBytes = Object.values(langs).reduce((s,v)=>s+v,0);
+              const entries = Object.entries(langs).sort((a,b)=>b[1]-a[1]).slice(0,4);
+              const langList = document.createElement('div');
+              langList.className = 'lang-list';
+              entries.forEach(([lang, bytes])=>{
+                const pct = Math.round((bytes/totalBytes)*100);
+                const color = LANG_COLORS[lang] || '#94a3b8';
+                const pill = document.createElement('span');
+                pill.className = 'lang-pill';
+                pill.innerHTML = `<span style="width:10px;height:10px;border-radius:50%;display:inline-block;background:${color}"></span>${lang} ${pct}%`;
+                langList.appendChild(pill);
+              });
+              meta.insertBefore(langList, meta.firstChild);
+            }
+          }, LANG_CONCURRENCY);
+
+          // Latest commits: fetch for top repos + recent ones (limit)
+          const commitTargets = [...topRepos, ...sourceRepos.slice(0, 40)].slice(0, 60); // cap requests
+          await pMap(commitTargets, async r => {
+            const c = await fetchLatestCommit(USER, r.name, r.default_branch);
+            const el = repoElements[r.name];
+            if(el){
+              const act = el.querySelector('.repo-activity');
+              if(c) act.textContent = `Last commit: ${fmtDate(c.date)} · ${c.message || ''}`;
+              else act.textContent = `Last commit: ${fmtDate(r.pushed_at)}`;
+            }
+          }, COMMIT_CONCURRENCY);
+
+          // Contributors stats for best-effort commit count (cap to first N repos)
+          const statsTargets = sourceRepos.slice(0, 40);
+          let totalCommits = 0;
+          await pMap(statsTargets, async r => {
+            const stats = await fetchContribsStats(USER, r.name);
+            if(Array.isArray(stats)){
+              const repoCommits = stats.reduce((s,c)=>s + (c.total||0), 0);
+              totalCommits += repoCommits;
+            }
+          }, STATS_CONCURRENCY);
+          totalCommitsEl.textContent = totalCommits ? `${totalCommits} (partial)` : '—';
+
+        }catch(err){
+          console.error('Error loading repos:', err);
+          reposEl.innerHTML = `<div style="color:var(--muted)">Unable to load repositories: ${escapeHtml(err.message || 'unknown')}</div>`;
+        }
+      }
+
+      // Small wrappers used above that rely on fetch helpers
+      async function fetchLatestCommit(owner, repoName, branch){
+        try{
+          const commits = await ghFetchJson(`/repos/${owner}/${repoName}/commits?sha=${branch || 'master'}&per_page=1`);
+          if(Array.isArray(commits) && commits[0]){
+            const c = commits[0];
+            return { sha: c.sha, date: c.commit?.author?.date || c.commit?.committer?.date, message: c.commit?.message?.split('\n')[0] };
+          }
+          return null;
+        }catch(err){
+          return null;
+        }
+      }
+
+      async function fetchContribsStats(owner, repoName){
+        const path = `/repos/${owner}/${repoName}/stats/contributors`;
+        for(let attempt=0; attempt < STATS_POLL_RETRIES; attempt++){
+          try{
+            const res = await ghFetchRaw(path);
+            if(res.status === 202){
+              await new Promise(r => setTimeout(r, STATS_POLL_DELAY * (attempt + 1)));
+              continue;
+            }
+            if(!res.ok) return null;
+            const json = await res.json();
+            return json;
+          }catch(e){ return null; }
+        }
+        return null;
+      }
+
+      // Kick off everything
+      (async function init(){
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.getElementById('email').href = `mailto:${CONTACT_EMAIL}`;
+
+        // show progressive reveal
+        window.addEventListener('load', ()=> document.querySelectorAll('.fade').forEach((el,i)=> setTimeout(()=>el.classList.add('show'), 70*i)));
+
+        // load profile, orgs, repos
+        try{
+          await loadProfile();
+        }catch(e){ /* already handled */ }
+
+        // organizations and repos in parallel (repos can be heavy)
+        loadOrgs().catch(()=>{});
+        loadAllRepos().catch(()=>{});
+      })();
+
+      // Accessibility: pressing 't' toggles theme
+      window.addEventListener('keydown', e => { if(e.key === 't' && !/input|textarea/i.test(document.activeElement?.tagName)) cycleTheme(); });
+
+      // On first load, show token status if token present
+      if(localStorage.getItem(TOKEN_KEY)){
+        tokenStatusEl.textContent = 'API: token set (higher rate-limits)';
+      } else {
+        tokenStatusEl.textContent = 'API: public (rate-limited)';
+      }
+    })();
+  </script>
+</body>
+</html>
